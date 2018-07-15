@@ -30,12 +30,13 @@ They will be added as separate roles in the future.
 
 playbook.yml:
 
+'''
 ---
 - name: Install WordPress
   hosts: all
   become: true
   roles: 
     - ansible-wordpress-role
-
+'''
 
 PS: If you are looking for a freelancer to manage InvoiceNinja for your business, there is a contact section on my homepage https://a.bujupi.me 😉
