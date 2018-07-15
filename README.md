@@ -38,6 +38,6 @@ They will be added as separate roles in the future.
     - ansible-invoicecinja-role
 ~~~~
 
-[Arjon Bujupi](https://a.bujupi.me)'''
+[Arjon Bujupi](https://a.bujupi.me)
 
 PS: If you are looking for a freelancer to manage InvoiceNinja for your business, there is a contact section on my homepage https://a.bujupi.me 😉
