@@ -2,11 +2,12 @@ InvoiceNinja is an open source billing platform used mostly by freelancers and s
 
 InvoiceNinja requires PHP, MySQL/MatiaDB and a webserver. Installing the software manually is easy.
 
-Download the zip file from https://download.invoiceninja.com
-Upload the code to your server
-Setup the database
-Configure the web server
-Configure the application for your usecase
+1. Download the zip file from https://download.invoiceninja.com
+2. Upload the code to your server
+3. Setup the database
+4. Configure the web server
+5. Configure the application for your usecase
+
 To update the app you just need to copy over the latest code. The app tracks the current version in a file called version.txt, if it notices a change it loads /update to run the database migrations.
 
 But who has time to manually install and update a software nowadays?! We can always use an automation tool like Ansible to do the job for us.
