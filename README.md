@@ -21,13 +21,21 @@ Fixes the permissions for the software files.
 Restarts Nginx to reload the configuration.
 
 Note: The role copies the Nginx config files to /etc/nginx/vhosts so you need to add 'include /etc/nginx/vhosts/*.conf;' to your nginx.conf file. 
-1
-Note: The role copies the Nginx config files to /etc/nginx/vhosts so you need to add 'include /etc/nginx/vhosts/*.conf;' to your nginx.conf file. 
+ 
 My role does not:
 
 Install Nginx
 Install MariaDB
 They will be added as separate roles in the future.
+
+playbook.yml:
+
+---
+- name: Install WordPress
+  hosts: all
+  become: true
+  roles: 
+    - ansible-wordpress-role
 
 
 PS: If you are looking for a freelancer to manage InvoiceNinja for your business, there is a contact section on my homepage https://a.bujupi.me 😉
