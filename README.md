@@ -13,19 +13,20 @@ But who has time to manually install and update a software nowadays?! We can alw
 
 My role does the following steps:
 
-Copies the Nginx virtual host template filled with your configurations.
-Downloads the latest zip file from https://download.invoiceninja.com and unzips it to the domain root directory.
-Copies the .env template file with all our configurations.
-Creates the MariaDB database and user.
-Fixes the permissions for the software files.
-Restarts Nginx to reload the configuration.
+1. Copies the Nginx virtual host template filled with your configurations.
+2. Downloads the latest zip file from https://download.invoiceninja.com and unzips it to the domain root directory.
+3. Copies the .env template file with all our configurations.
+4. Creates the MariaDB database and user.
+5. Fixes the permissions for the software files.
+6. Restarts Nginx to reload the configuration.
 
 Note: The role copies the Nginx config files to /etc/nginx/vhosts so you need to add 'include /etc/nginx/vhosts/*.conf;' to your nginx.conf file. 
  
 My role does not:
 
-Install Nginx
-Install MariaDB
+- Install Nginx
+- Install MariaDB
+
 They will be added as separate roles in the future.
 
 > playbook.yml:
