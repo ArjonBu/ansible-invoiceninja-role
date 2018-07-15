@@ -28,15 +28,16 @@ Install Nginx
 Install MariaDB
 They will be added as separate roles in the future.
 
-playbook.yml:
-
-'''
+> playbook.yml:
+~~~~
 ---
-- name: Install WordPress
+- name: Install InvoiceNinja
   hosts: all
   become: true
   roles: 
-    - ansible-wordpress-role
-'''
+    - ansible-invoicecinja-role
+~~~~
+
+[Arjon Bujupi](https://a.bujupi.me)'''
 
 PS: If you are looking for a freelancer to manage InvoiceNinja for your business, there is a contact section on my homepage https://a.bujupi.me 😉
