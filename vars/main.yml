@@ -1,0 +1,43 @@
+---
+
+invoiceninja_version: 4.4.4
+invoiceninja_zip_url: 'https://download.invoiceninja.com/ninja-v{{ invoiceninja_version }}.zip'
+
+nginx_invoiceninja_domain: 'a.bujupi.me'
+nginx_invoiceninja_domain_root: '/var/www/{{ nginx_invoiceninja_domain }}'
+nginx_invoiceninja_vhost_destination: '/etc/nginx/vhosts/'
+nginx_invoiceninja_domain_ssl_certificate: '/etc/nginx/ssl/{{ nginx_invoiceninja_domain }}.crt' 
+nginx_invoiceninja_domain_ssl_certificate_key: '/etc/nginx/ssl/{{ nginx_invoiceninja_domain }}.key' 
+nginx_user: nginx
+
+db_hostname: localhost
+db_port: 3306
+db_root_username: root 
+db_root_password: password 
+
+invoiceninja_database_name: invoiceninja_database 
+invoiceninja_database_user: invoiceninja_user 
+invoiceninja_database_user_password: invoiceninja_password
+DB_TYPE: mysql
+
+#ENV file configuration for Invoice Ninja
+APP_ENV: production
+APP_DEBUG: "false"
+APP_URL: "https://{{ nginx_invoiceninja_domain }}"
+APP_KEY: eDfP6yoHAFQdCzSWzQiJ7yFxfMsRuwBN #change this to a random text with 32 characters 
+APP_CIPHER: AES-256-CBC
+MAIL_DRIVER: smtp
+MAIL_PORT: 
+MAIL_ENCRYPTION:
+MAIL_HOST: 
+MAIL_USERNAME:
+MAIL_FROM_ADDRESS: 
+MAIL_FROM_NAME: 
+MAIL_PASSWORD: 
+PHANTOMJS_CLOUD_KEY: 
+MAILGUN_DOMAIN: 
+MAILGUN_SECRET: 
+API_SECRET:
+REQUIRE_HTTPS: "true"
+GOOGLE_MAPS_ENABLED: "true"
+GOOGLE_MAPS_API_KEY:

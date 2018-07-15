@@ -1,0 +1,73 @@
+---
+- name: Transfer invoiceninja nginx vhost config file
+  template:
+    src: invoiceninja-nginx.conf.j2
+    dest: '{{ nginx_invoiceninja_vhost_destination }}/{{ nginx_invoiceninja_domain }}.conf'
+
+- name: Create the domain root directory
+  file:
+    path: '{{ nginx_invoiceninja_domain_root }}'
+    state: directory
+    owner: '{{ nginx_user }}'
+    group: '{{ nginx_user }}'
+    mode: 0755
+
+- name: Download invoiceninja zip file and extract it to the domain directory
+  unarchive:
+    src: '{{ invoiceninja_zip_url }}'
+    dest: '{{ nginx_invoiceninja_domain_root }}'
+    owner: '{{ nginx_user }}'
+    group: '{{ nginx_user }}'    
+    remote_src: yes
+
+- name: Move files from ninja directory to our site root (invoiceninja zip has a ninja folder inside)
+  shell: 'rsync -a {{ nginx_invoiceninja_domain_root }}/ninja/* {{ nginx_invoiceninja_domain_root }}'
+
+- name: Remove the 'ninja' directory
+  file:
+    state: absent
+    path: '{{ nginx_invoiceninja_domain_root }}/ninja/'
+
+- name: Set permissions (0755) for directories
+  command: 'find {{ nginx_invoiceninja_domain_root }} -type d -exec chmod 0755 {} \;'
+
+- name: Set permissions (0644) for files
+  command: 'find {{ nginx_invoiceninja_domain_root }} -type f -exec chmod 0644 {} \;' 
+
+- name: Copy .env template file with the invoiceninja configurations
+  template:
+    src: env.example.j2
+    dest: '{{ nginx_invoiceninja_domain_root }}/.env'
+    owner: '{{ nginx_user }}'
+    group: '{{ nginx_user }}'
+    mode: 0644
+
+- name: Delete .env.example
+  file:
+    state: absent
+    path: '{{ nginx_invoiceninja_domain_root }}/.env.example'
+
+- name: Create the database name for the new invoiceninja site
+  mysql_db:
+    name: '{{ invoiceninja_database_name }}'
+    state: present
+    login_host: '{{ db_hostname }}'
+    login_port: '{{ db_port }}'
+    login_user: '{{ db_root_username }}'
+    login_password: '{{ db_root_password }}'
+
+- name: Create the database user for the new invoiceninja site with all privileges on the invoiceninja database
+  mysql_user:
+    name: '{{ invoiceninja_database_user }}'
+    password: '{{ invoiceninja_database_user_password }}'
+    priv: '{{ db_hostname }}.*:ALL'
+    state: present
+    login_host: '{{ db_hostname }}'
+    login_port: '{{ db_port }}'
+    login_user: '{{ db_root_username }}'
+    login_password: '{{ db_root_password }}'
+
+- name: Role finished
+  debug:
+   msg: 'To finish your installation, go to https://{{ nginx_invoiceninja_domain }}'
+  notify: restart nginx
