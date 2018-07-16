@@ -60,7 +60,7 @@
   mysql_user:
     name: '{{ invoiceninja_database_user }}'
     password: '{{ invoiceninja_database_user_password }}'
-    priv: '{{ db_hostname }}.*:ALL'
+    priv: '{{ invoiceninja_database_name }}.*:ALL'
     state: present
     login_host: '{{ db_hostname }}'
     login_port: '{{ db_port }}'
